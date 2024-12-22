@@ -3,6 +3,6 @@
 Working on: https://www.overleaf.com/read/khykstmjrcrj#42384d
 
 # Authors
-Matteo Rossi
-Riccardo Piantoni
+Matteo Rossi,
+Riccardo Piantoni,
 Jacopo Sacramone
