@@ -1,0 +1,42 @@
+frame UC11 - Manage Internship Recommendations
+title UC11 - Manage Internship Recommendations
+
+actor Student
+participant WebApp
+participant OfferManager
+database InternshipsDBMS
+participant RecommendationManager
+database RecommendationsDBMS
+
+activate Student
+activate WebApp
+loop allUnhandledRecommendation
+    opt decisionNotPostponed
+        alt accept
+            Student->WebApp: onClick("Accept" button)
+            WebApp->RecommendationManager: .../api/v1/recommendations/manager/accept/...
+            activate RecommendationManager
+            RecommendationManager->RecommendationsDBMS: UPDATE query
+            activate RecommendationsDBMS
+            RecommendationManager<<--RecommendationsDBMS: queryResult
+            deactivateafter RecommendationsDBMS
+            ref over Student, RecommendationsDBMS: ++**SD9 - Apply to an Internship Offer**++
+            WebApp<<--RecommendationManager: 200: successfullyAccepted
+            deactivateafter RecommendationManager
+            Student<<--WebApp: showPopup(successfullyAccepted)
+        else reject
+            Student->WebApp: onClick("Reject" button)
+            WebApp->RecommendationManager: .../api/v1/recommendations/manager/reject/...
+            activate RecommendationManager
+            RecommendationManager->RecommendationsDBMS: UPDATE query
+            activate RecommendationsDBMS
+            RecommendationManager<<--RecommendationsDBMS: queryResult
+            deactivateafter RecommendationsDBMS
+            WebApp<<--RecommendationManager: 200: successfullyRejected
+            deactivateafter RecommendationManager
+            Student<<--WebApp: showPopup(successfullyRejected)
+        end
+    end
+end
+deactivateafter WebApp
+deactivateafter Student
