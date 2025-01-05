@@ -1,0 +1,49 @@
+frame UC12 - Manage Students Recommendations
+title UC12 - Manage Students Recommendations
+
+actor Company
+participant WebApp
+participant RecommendationManager
+database RecommendationsDBMS
+
+activate Company
+activate WebApp
+loop allUnhandledRecommendation
+    opt decisionNotPostponed
+        alt accept
+            Company->WebApp: onClick("Accept" button)
+            WebApp->RecommendationManager: .../api/v1/recommendations/manager/accept/...
+            activate RecommendationManager
+            RecommendationManager->RecommendationsDBMS: UPDATE query
+            activate RecommendationsDBMS
+            RecommendationManager<<--RecommendationsDBMS: queryResult
+            RecommendationManager->RecommendationsDBMS: READ query
+            RecommendationManager<<--RecommendationsDBMS: queryResult
+            opt studentDoesntHaveRecommendation
+                RecommendationManager->RecommendationsDBMS: CREATE query
+                RecommendationManager<<--RecommendationsDBMS: queryResult
+            end
+            deactivateafter RecommendationsDBMS
+            WebApp<<--RecommendationManager: 200: successfullyAccepted
+            deactivateafter RecommendationManager
+            Company<<--WebApp: showPopup(successfullyAccepted)
+            deactivateafter WebApp
+            deactivateafter Company
+        else reject
+            activate Company
+            Company->WebApp: onClick("Reject" button)
+            activate WebApp
+            WebApp->RecommendationManager: .../api/v1/recommendations/manager/reject/...
+            activate RecommendationManager
+            RecommendationManager->RecommendationsDBMS: UPDATE query
+            activate RecommendationsDBMS
+            RecommendationManager<<--RecommendationsDBMS: queryResult
+            deactivateafter RecommendationsDBMS
+            WebApp<<--RecommendationManager: 200: successfullyRejected
+            deactivateafter RecommendationManager
+            Company<<--WebApp: showPopup(successfullyRejected)
+        end
+    end
+end
+deactivateafter WebApp
+deactivateafter Company
