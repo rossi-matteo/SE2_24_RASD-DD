@@ -1,0 +1,52 @@
+frame UC4 - Login by a User
+title UC4 - Login by a User
+
+actor User
+participant WebApp
+participant SecurityManager
+database SecurityDBMS
+participant ProfileManager
+database ProfilesDBMS
+
+activate User
+User->WebApp: onClick("Login" button)
+activate WebApp
+WebApp->SecurityManager: .../api/v1/authentication/login/...
+activate SecurityManager
+SecurityManager->SecurityDBMS: READ query
+activate SecurityDBMS
+SecurityManager<<--SecurityDBMS: queryResult
+deactivateafter SecurityDBMS
+alt wrongCredentials
+    WebAppx--SecurityManager: 400: wrongCredentials
+    User<<--WebApp: showPopup(wrongCredentials)
+else validCredentials
+    alt unverifiedAccount
+        WebAppx--SecurityManager: 400: unverifiedAccount
+        User<<--WebApp: showPopup(unverifiedAccount)
+    else verifiedAccount
+        SecurityManager<-SecurityManager: generateToken()
+        activate SecurityManager
+        SecurityManager<<--SecurityManager: returnValue
+        deactivate SecurityManager
+        SecurityManager->ProfileManager: .../api/v1/profiles/get/...
+        activate ProfileManager
+        ProfileManager->ProfilesDBMS: READ query
+        activate ProfilesDBMS
+        ProfileManager<<--ProfilesDBMS: queryResult
+        deactivateafter ProfilesDBMS
+        SecurityManager<<--ProfileManager: 200: user
+        deactivateafter ProfileManager
+        alt incompleteProfile
+            WebApp<<--SecurityManager: 308: updateProfilePage, incompleteProfile, token
+            User<<--WebApp: redirect(updateProfilePage)
+            User<<-WebApp: showPopup(incompleteProfile)
+        else completeProfile
+            WebApp<<--SecurityManager: 308: dashboardPage, successfulLogin, token
+            User<<--WebApp: redirect(dashboardPage)
+           end
+    end
+end
+deactivateafter SecurityManager
+deactivateafter WebApp
+deactivateafter User

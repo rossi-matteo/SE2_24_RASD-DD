@@ -1,0 +1,110 @@
+This chapter shows how the functional and non-functional requirements of the S\&C system described in the RASD are mapped to each component.
+First, we describe the mapping between the requirements listed in Section 2.2.1. \textit{Requirements} of the RASD document
+and the components identified in the Component Diagram section of the DD document.
+Then, we comment on how Sections 3.3 \textit{Performance Requirements} and 3.5 \textit{Software System Attributes} of the RASD document are achieved through the decisions taken for the S\&C system.
+
+\section{Functional Requirements Traceability}
+\label{sec: functional_requirements_traceability}
+The following table lists all the requirements linked within each component.
+\begin{center}
+    \begin{longtable}{p{0.3\linewidth}p{0.7\linewidth}}
+        \hline
+        \textbf{MailingService}                 & [R1]\ Upon request, the system shall allow the User to sign up to the platform, as long as they submit all the required information, they don’t already have a profile in the platform and their identity and role (Student, Company or University) are verified. \\ \\
+        \hline
+        \textbf{SecurityManager}                 & [R1] Upon request, the system shall allow the User to sign up to the platform, as long as they submit all the required information, they don’t already have a profile in the platform and their identity and role (Student, Company or University) are verified. \\ \\
+        & [R2] Upon request, the system shall allow the requesting User to log in to the platform, granting him access to their profile as long as their authentication is successful. \\ \\
+        \hline
+        \textbf{ProfileManager}             & [R3] Upon request, the system shall allow the requesting User to update their profile, as long as they provide all the necessary information. \\ \\
+        \hline
+        \textbf{OfferManager}                        & [R4] Upon request, the system shall allow a Company to publish a new internship offer, as long as it provides all the required information and the latter is compliant with platform guidelines. \\ \\     
+        & [R5] Whenever a Company publishes an internship offer, the system shall add it to the list of all the internship offers. \\ \\
+        & [R6] Upon request, the system shall allow the requesting Company to update information for any of their open internship offers, as long as it provides all the necessary information. \\ \\
+        & [R7] Upon request, the system shall allow the requesting Company to withdraw any of their open internship offers. \\ \\
+        & [R8] Upon request, the system shall allow a Student to search for desired internship offers by applying optional filters to the list. \\ \\
+        & [R9] Whenever receiving a list of filter attributes for searching internship offers, the system shall return the list of all the offers matching the selected criteria. \\ \\
+        & [R10] Upon request, the system shall allow the requesting Student to apply to an internship offer, as long as that offer’s application deadline has not expired. \\ \\
+        & [R11] Whenever a Student applies for an internship offer, the system shall add them to the list of candidates for that offer. \\ \\
+        & [R14] Whenever an internship offer is withdrawn by its publishing Company, the system shall discard all applications to that offer. \\ \\
+        & [R23] Whenever a Student accepts one of their received recommendations, the system shall apply the requesting Student to the internship offer to which the recommendation refers. \\ \\
+        \hline
+        \textbf{InterviewManager}           & [R25] After the application deadline of an internship has expired, the system shall allow the publishing Company to contact a Student who had previously applied to that offer in order to plan a future interview with them, if none has been planned yet. \\ \\
+        & [R26] Whenever a Student receives an interview proposal, the system shall allow that Student to either accept it or refuse it by providing a reason. \\ \\
+        & [R27] Whenever an interview has to be carried out in-platform, the system shall allow the interviewing Company to submit questions to the Student involved. \\ \\
+        & [R28] Whenever a Company submits questions to a Student for an in-platform interview, the system shall allow that Student to answer those questions, reporting them to the interviewing Company. \\ \\
+        & [R29] Upon request, the system shall allow a Company to evaluate the answers received from a Student in one of their interviews, by registering that interview’s result. \\ \\
+        & [R30] Whenever a Company evaluates an interview (both in-platform and in-person), the system shall inform the corresponding Student of the registered outcome. \\ \\
+        & [R31] Whenever the interview results for all the candidates for an internship offer have been registered into the platform, the system shall close the selection process of that offer. \\ \\
+        \hline
+        \textbf{InternshipMonitoringAnd FeedbackManager (IMFM)}              & [R32] Upon request, the system shall allow the requesting Party to provide new information about any of the ongoing internships in which that Party is involved. \\ \\
+        & [R33] Upon request, the system shall yield to the requesting Party all the information about one of the ongoing internships it is involved in. \\ \\
+        & [R34] Upon request, the system shall allow the requesting Party to report a problem occurring in one of the ongoing internships it is involved in. \\ \\ 
+        & [R35] When receiving a problem report about an internship from a Party, the system shall forward it to the University of the Student involved in that internship. \\ \\
+        & [R36] Upon request, the system shall allow the requesting University to handle a received problem regarding an ongoing internship in which one of its Students is taking part. \\ \\
+        & [R37] Upon request, the system shall allow the requesting Party to report feedback about an internship in which it has been actively involved, if that internship has been completed. \\ \\
+        & [R38] Whenever receiving feedback about a completed internship, the system shall process it in order to improve the process for generating recommendations for the future. \\ \\
+        \hline
+        \textbf{RecommendationManager}        & [R12] Whenever a Student applies for an internship offer, the system shall mark all the "Unhandled" recommendations of that Student about that internship offer as "Accepted". \\ \\
+        & [R13] Whenever a Student applies for an internship offer, the system shall discard all the "Unhandled" recommendations of the Company offering it about that Student in the context of that offer. \\ \\
+        & [R15] Whenever an internship offer is withdrawn by its publishing Company, the system shall discard all generated recommendations linked to that offer. \\ \\
+        & [R16] Whenever a recommendation aimed at a Party is generated, the system shall add that recommendation to that Party’s profile, as long as there is not another "Unhandled" recommendation about the other Party in the context of the same offer. \\ \\
+        & [R17] Whenever a new Student signs up to the platform, the system shall generate, for every internship offer matching that Student’s data, a recommendation about them aimed at the Company advertising that offer, as long as the latter’s application deadline has not expired. \\ \\
+        & [R18] Whenever a Student updates their profile, the system shall generate, for every internship offer matching that Student’s updated data, a recommendation about them aimed at the Company advertising that offer, as long as the latter’s application deadline has not expired. \\ \\
+        & [R19] Whenever a Company publishes a new internship offer, the system shall generate, for every Student matching with that internship offer’s data, a recommendation about it aimed at that Student. \\ \\
+        & [R20] Whenever a Company updates data for an internship offer, the system shall generate, for every Student matching with that internship offer’s updated data, a recommendation about it aimed at that Student. \\ \\
+        & [R21] Whenever an internship offer is withdrawn by its publishing Company or its application deadline expires, the system shall discard all the recommendations about it, regardless of whether they have been accepted or not. \\ \\
+        & [R22] Upon request, the system shall allow the requesting Party to manage their received recommendations by accepting or refusing them, if those have not already expired. \\ \\
+        & [R23] Whenever a Student accepts one of their received recommendations, the system shall apply the requesting Student to the internship offer to which the recommendation refers. \\ \\
+        & [R24] Whenever a Company accepts one of their received recommendations, the system shall generate a symmetric recommendation to the corresponding Student and add it to the latter’s list of recommendations, as long as the generated recommendation is not already present in it. \\ \\
+        \hline
+        \textbf{OptimizationManager}                      & [R39] Upon request, the system shall provide a Student with targeted suggestions for optimizing its profile, enabling the Student to improve its appeal and relevance for obtaining more internship offers in the future, if such optimizations can be found. \\ \\
+        & [R40] Upon request, the system shall provide a Company with targeted suggestions for optimizing a selected internship offer, enabling the Company to make it more attractive to Students and to improve its visibility for the future, if such optimizations can be found. \\ \\
+        \hline
+        \caption{Mapping between Components and Requirements.}
+        \label{tab: map_comp_req}
+    \end{longtable}
+\end{center}
+
+\newpage
+
+\section{Non Functional Requirements Traceability}
+\label{sec: non_functional_requirements_traceability}
+
+\subsection{Performance Requirements}
+\label{subsec:performance_requirements}
+
+The performance requirements outlined in Section 3.3 \textit{Performance Requirements} of the RASD document are addressed through some design decisions (already discussed in \hyperref[sec: patterns]{\uline{Section 2.6}}) and the adoption of scalable and efficient technologies in the S\&C system. Below, we explain how they are achieved:
+
+\begin{itemize}
+\item \textbf{Handling 10,000 concurrent users:}
+The scalability of the system is ensured by its distributed 4-Tier Architecture and containerized microservices. The container orchestration platform dynamically manages the allocation of resources based on workload, ensuring that at least up to 10,000 concurrent users can interact with the system without significant performance degradation. Furthermore, the microservices architecture allows for horizontal scaling, enabling the system to handle increased user loads if required by future business decisions.
+
+\item \textbf{Recommendations accuracy and scalability:}
+The recommendation system is implemented as a dedicated microservice, relying on a machine learning model, that should guarantee both an accuracy and F1 score of at least 0.8, to be previously verified during the testing phase and continuously monitored when the system will be running. Its design enables batch processing of data and scaling to handle up to 1,000,000,000 unique user profiles efficiently, by actively operating on the corresponding data storages.
+
+\item \textbf{Low response time for requests (< 5 seconds)}
+The system offers fast response times by employing RESTful APIs and efficient load balancing in all the involved layers. Requests are distributed evenly across server instances of Application and Data Layer. For computationally intensive processes such as recommendations, asynchronous handling and caching of previous queries ensure prompt delivery of results to the user.
+
+\item \textbf{Real-time data updates (< 0.01 seconds)}
+The introduction of a distributed cache in the Data Layer should guarantee low-latency access to updated information, when retrieving already fetched data.
+\end{itemize}
+
+\newpage
+
+\subsection{Software System Attributes}
+\label{subsec:software_system_attributes}
+
+The software system attributes outlined in Section 3.5 \textit{Software System Attributes} of the RASD document have already been hinted at several times in the context of this Design Document.
+Below, we explain how they are achieved:
+
+\begin{itemize}
+\item \textbf{Reliability:} The replication of the services, accomplished through the containerization approach, and of the databases, carried out with the Event Sourcing pattern, makes the system highly scalable: new instances of the microservices can be dynamically deployed as needed by the current requests load, basically guaranteeing that the Quality-of-Service (QoS) remains stably high throughout the system's lifecycle, unless exceptional circumstances happen. In addition, another consequence of the (geographic) distribution and replication of nodes is that the system becomes greatly fault-tolerant, which means that it is able to resist service and network failures to a certain extent, without necessarily interrupting the provision of functionalities and achieving graceful degradation.
+
+\item \textbf{Availability:} The system offers the availability previously declared in the RASD (two-nines) through the use of replicated databases, container orchestration for dynamic scaling, and a load balancer that distributes incoming requests evenly across servers so that they can be managed in parallel, therefore reducing the risk of downtime and ensuring consistent performance under varying workloads. Further, the choice of adopting eventual consistency reduces the overhead in synchronizing the databases, so that they can fulfill incoming requests more readily.
+
+\item \textbf{Security:} Authentication and authorization mechanisms relying on token-based access control, alongside a web server acting as an external entry point for filtering and managing incoming requests, and encrypted communication via HTTPS, collectively ensure a secure system.
+
+\item \textbf{Maintainability:} The adoption of the microservices architecture makes the system extremely modular, and the resulting separation of concerns enables the possibility to make updates to a service without completely affecting or bringing down the other ones. Moreover, thanks to containerization, it is possible to deploy additional services offering new functionalities as needed, without impacting the already running system.
+
+\item \textbf{Portability:} As previously discussed in the RASD document, since the application is offered in the form of a WebApp, it inherently supports compatibility across various operating systems. Considering the architectural aspects of the system, as the platform is deployed through containers and the communication is mainly made through standard and technology-neutral protocols, it can be easily migrated regardless of the underlying infrastructure.
+
+\end{itemize} 

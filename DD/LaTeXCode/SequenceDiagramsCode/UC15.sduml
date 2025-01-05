@@ -1,0 +1,25 @@
+frame UC15 - Monitor an ongoing Internship
+title UC15 - Monitor an ongoing Internship
+
+actor Party
+participant WebApp
+participant IMFManager
+database InternshipsDBMS
+
+activate Party
+Party->WebApp: onClick(internship widget)
+activate WebApp
+WebApp->IMFManager: .../api/v1/internships/get/...
+activate IMFManager
+IMFManager->InternshipsDBMS: READ query
+activate InternshipsDBMS
+IMFManager<<--InternshipsDBMS: queryResult
+deactivateafter InternshipsDBMS
+WebApp<<--IMFManager: 200: internship
+deactivateafter IMFManager
+Party<<--WebApp: show(internship)
+opt provideInformation
+    ref over Party, InternshipsDBMS: ++**SD14 - Provide Information for an ongoing Internship**++
+end
+deactivateafter WebApp
+deactivateafter Party

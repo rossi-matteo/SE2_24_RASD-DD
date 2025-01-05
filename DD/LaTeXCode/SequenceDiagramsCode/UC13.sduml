@@ -1,0 +1,114 @@
+frame UC13 - Manage an Interview
+title UC13 - Manage an Interview
+
+actor Company
+participant CompanyWebApp
+actor Student
+participant StudentWebApp
+participant InterviewManager
+database InternshipsDBMS
+
+loop while interviewNotScheduled AND tryingToReschedule
+    activate Company
+    Company->CompanyWebApp: onClick("Send Invitation" button)
+    activate CompanyWebApp
+    CompanyWebApp->InterviewManager: .../api/v1/interviews/sendInvitation/...
+    activate InterviewManager
+    InterviewManager->InternshipsDBMS: CREATE query
+    activate InternshipsDBMS
+    InterviewManager<<--InternshipsDBMS: queryResult
+    deactivateafter InternshipsDBMS
+    CompanyWebApp<<--InterviewManager: 200: invitationSent
+    deactivateafter InterviewManager
+    Company<<--CompanyWebApp: showPopup(invitationSent)
+    deactivateafter CompanyWebApp
+    deactivateafter Company
+
+    break notTryingToReschedule
+    end
+
+    == After some time ==
+
+    activate Student
+    activate StudentWebApp
+    break invitationAccepted
+        Student->StudentWebApp: onClick("Accept Invitation" button)
+        StudentWebApp->InterviewManager: .../api/v1/interviews/acceptInvitation/...
+        activate InterviewManager
+        InterviewManager->InternshipsDBMS: UPDATE query
+        activate InternshipsDBMS
+        InterviewManager<<--InternshipsDBMS: queryResult
+        deactivateafter InternshipsDBMS
+        StudentWebApp<<--InterviewManager: 200: invitationAccepted
+        deactivateafter InterviewManager
+        Student<<--StudentWebApp: showPopup(invitationAccepted)
+    end
+
+    Student->StudentWebApp: onClick("Decline Invitation" button)
+    StudentWebApp->InterviewManager: .../api/v1/interviews/declineInvitation/...
+    activate InterviewManager
+    InterviewManager->InternshipsDBMS: UPDATE query
+    activate InternshipsDBMS
+    InterviewManager<<--InternshipsDBMS: queryResult
+    deactivateafter InternshipsDBMS
+    StudentWebApp<<--InterviewManager: 200: invitationDeclined
+    deactivateafter InterviewManager
+    Student<<--StudentWebApp: showPopup(invitationDecline)
+    deactivateafter StudentWebApp
+    deactivateafter Student
+end
+
+opt interviewScheduled
+    opt inPlatformInterview
+        activate Company
+        Company->CompanyWebApp: onClick("Post Questions" button)
+        activate CompanyWebApp
+        CompanyWebApp->InterviewManager: .../api/v1/interviews/createQuestions/...
+        activate InterviewManager
+        InterviewManager->InternshipsDBMS: CREATE query
+        activate InternshipsDBMS
+        InterviewManager<<--InternshipsDBMS: queryResult
+        deactivateafter InternshipsDBMS
+        CompanyWebApp<<--InterviewManager: 200: questionsCreated
+        deactivateafter InterviewManager
+        Company<<--CompanyWebApp: showPopup(questionsCreated)
+        deactivateafter CompanyWebApp
+        deactivateafter Company
+
+        == After some time ==
+
+        loop someQuestions
+            activate Student
+            Student->StudentWebApp: onClick("Reply to Question" button)
+            activate StudentWebApp
+            StudentWebApp->InterviewManager: .../api/v1/interviews/submitAnswer/...
+            activate InterviewManager
+            InterviewManager->InternshipsDBMS: CREATE query
+            activate InternshipsDBMS
+            InterviewManager<<--InternshipsDBMS: queryResult
+            deactivateafter InternshipsDBMS
+            StudentWebApp<<--InterviewManager: 200: answerSubmitted
+            deactivateafter InterviewManager
+            Student<<--StudentWebApp: showPopup(answerSubmitted)
+            deactivateafter StudentWebApp
+            deactivateafter Student
+        end
+    end
+
+    == After some time ==
+
+    activate Company
+    Company->CompanyWebApp: onClick("Post Result" button)
+    activate CompanyWebApp
+    CompanyWebApp->InterviewManager: .../api/v1/interviews/evaluate/...
+    activate InterviewManager
+    InterviewManager->InternshipsDBMS: UPDATE query
+    activate InternshipsDBMS
+    InterviewManager<<--InternshipsDBMS: queryResult
+    deactivateafter InternshipsDBMS
+    CompanyWebApp<<--InterviewManager: 200: interviewEvaluated
+    deactivateafter InterviewManager
+    Company<<--CompanyWebApp: showPopup(interviewEvaluated)
+    deactivateafter CompanyWebApp
+    deactivateafter Company
+end

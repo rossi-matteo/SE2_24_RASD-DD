@@ -1,0 +1,58 @@
+frame UC9 - Apply to an Internship Offer
+title UC9 - Apply to an Internship Offer
+
+actor Student
+participant WebApp
+participant OfferManager
+database InternshipsDBMS
+participant RecommendationManager
+database RecommendationsDBMS
+
+activate Student
+Student->WebApp: onClick("Apply" button)
+activate WebApp
+WebApp->OfferManager: .../api/v1/offers/apply/...
+activate OfferManager
+OfferManager->InternshipsDBMS: READ query
+activate InternshipsDBMS
+OfferManager<<--InternshipsDBMS: queryResult
+deactivateafter InternshipsDBMS
+alt expiredDeadline
+    WebAppx--OfferManager: 400: expiredDeadline
+    Student<<--WebApp: showPopup(expiredDeadline)
+else deadlineNotExpired
+    OfferManager->RecommendationManager: .../api/v1/recommendations/manager/list/...
+    activate RecommendationManager
+    RecommendationManager->RecommendationsDBMS: READ query
+    activate RecommendationsDBMS
+    RecommendationManager<<--RecommendationsDBMS: queryResult
+    deactivateafter RecommendationsDBMS
+    OfferManager<<--RecommendationManager: 200: listOfRecommendations
+    deactivateafter RecommendationManager
+    OfferManager->RecommendationManager: .../api/v1/recommendations/manager/accept/...
+    activate RecommendationManager
+    RecommendationManager->RecommendationsDBMS: UPDATE query
+    activate RecommendationsDBMS
+    RecommendationManager<<--RecommendationsDBMS: queryResult
+    deactivateafter RecommendationsDBMS
+    OfferManager<<--RecommendationManager: 200: successfullyAccepted
+    deactivateafter RecommendationManager
+    OfferManager->RecommendationManager: .../api/v1/recommendations/manager/discard/...
+    activate RecommendationManager
+    RecommendationManager->RecommendationsDBMS: DELETE query
+    activate RecommendationsDBMS
+    RecommendationManager<<--RecommendationsDBMS: queryResult
+    deactivateafter RecommendationsDBMS
+    OfferManager<<--RecommendationManager: 200: successfullyDiscarded
+    deactivateafter RecommendationManager
+    OfferManager->InternshipsDBMS: UPDATE query
+    activate InternshipsDBMS
+    OfferManager<<--InternshipsDBMS: queryResult
+    deactivateafter InternshipsDBMS
+    WebApp<<--OfferManager: 200: applicationSubmitted
+    Student<<--WebApp: showPopup(applicationSubmitted)
+end
+deactivateafter OfferManager
+deactivateafter WebApp
+deactivateafter Student
+
