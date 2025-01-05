@@ -1,0 +1,297 @@
+\section{Purpose}
+The transition from academia to the job market often presents significant challenges for university students, as they face difficulties in aligning their academic skills with industry expectations. Companies, on the other hand, struggle to efficiently connect with young talent and promote internships and job opportunities tailored to their needs. These gaps create inefficiencies in the hiring process, leaving valuable opportunities untapped.
+
+\textbf{Students\&Companies} (S\&C) is designed to fill this gap. The platform aims to facilitate entrance into the job market for students while enabling companies to effectively reach and recruit emerging talent. By addressing the mismatch between academic preparation and industry requirements, S\&C enhances the matching process, creating an ecosystem where education meets practical experience.
+\label{sec:purpose}%
+
+\subsection{Goals}
+\label{subsec:goals}%
+\newcounter{g}
+\setcounter{g}{1}
+\newcommand{\cg}{\theg\stepcounter{g}}
+
+\newcounter{subg}
+\setcounter{subg}{1}
+\newcommand{\csubg}{\thesubg\stepcounter{subg}}
+\newcommand{\resetsubg}{\setcounter{subg}{1}}
+
+
+In this section, there are defined the goals that the system has to achieve:
+
+    \uline{\textbf{Profile Management}}
+
+        \textbf{[G\cg]} Students, companies and universities should manage their profiles on the platform.
+
+    \uline{\textbf{Internships Publication and Search}}
+        
+        \textbf{[G\cg]} Companies should advertise their internships.
+
+        \textbf{[G\cg]} Students should apply for internships.
+
+    \uline{\textbf{Recommendations}}
+            
+        \textbf{[G\cg]} Students should receive recommendations about internship offers matching their CVs.
+
+        \textbf{[G\cg]} Companies should receive recommendations about students matching their preferences.
+
+    \uline{\textbf{Selection Process}}
+
+        \textbf{[G\cg]} Companies should manage the selection process aimed at evaluating candidates for their internship offers.
+        
+    \uline{\textbf{Monitoring}}
+
+        \textbf{[G\cg]} Both students and companies should monitor the evolution of the internships they are taking part in. 
+
+        \textbf{[G\cg]} Both students and companies should report complaints about the ongoing internships.
+
+        \textbf{[G\cg]} Universities should handle complaints about the internships of their students.
+
+        \textbf{[G\cg]} Both students and companies should provide feedback regarding the concluded internship they have taken part in.
+
+    \uline{\textbf{Submission Suggestions}}
+
+        \textbf{[G\cg]} Students should receive suggestions about how to make their CVs more appealing.
+        
+        \textbf{[G\cg]} Companies should receive suggestions about how to make their internship offers' descriptions more appealing.
+
+\section{Scope}
+\label{sec:scope}
+
+\textbf{Students\&Companies} (S\&C) is a platform that acts as an intermediary system facilitating the internship matching process between students and companies. It allows companies to advertise internships and students to search, receive customized recommendations, and initiate contact.
+
+The platform defines \textbf{Recommendation} as the automated process of identifying suitable internship opportunities for students and potential candidates for companies. Following this, a \textbf{Contact} represents the phase in which students and companies communicate via the platform to conduct the selection process, including interviews and candidate selection.
+
+The system automates key activities such as generating recommendations using various mechanisms, coordinating interviews, and collecting feedback to improve its algorithms. Additionally, it provides tools to monitor the progress of contacts and internships, manage issues through communication features, and enable universities to supervise the status of internships, ensuring compliance and resolving possible complaints effectively.
+
+\subsection{World Phenomena}
+\label{subsec:world_phenomena}
+\newcounter{wp}
+\setcounter{wp}{1}
+\newcommand{\cwp}{\thewp\stepcounter{wp}}
+
+        \textbf{[WP\cwp]} Students redact their CV.
+
+        \textbf{[WP\cwp]} Companies make new internship positions available.
+
+        \textbf{[WP\cwp]} Students decide to take an internship.
+
+        \textbf{[WP\cwp]} Companies select candidates to be interviewed among the applicants for each of their open positions.
+
+        \textbf{[WP\cwp]} Companies select the student candidates who fit the most according to the results of their interviews.
+
+        \textbf{[WP\cwp]} Students carry on their internships at their companies.
+
+        \textbf{[WP\cwp]} A problem arises in an ongoing internship.
+        
+        \textbf{[WP\cwp]} Universities handle complaints (eventually interrupting internships).
+
+\subsection{Shared Phenomena}
+\label{subsec:shared_phenomena}
+\newcounter{sp}
+\setcounter{sp}{1}
+\newcommand{\csp} {\thesp\stepcounter{sp}}
+
+\uline{\textbf{World Controlled}}
+
+        \textbf{[SP\csp]} Students, companies and universities sign up to the platform.
+
+        \textbf{[SP\csp]} Students, companies and universities log into the platform.
+
+        \textbf{[SP\csp]} Users provide information about themselves to the system.
+
+        \textbf{[SP\csp]} Companies provide information about their internship positions to the system.
+
+        \textbf{[SP\csp]} Students submit filters to search for suitable internship positions.
+
+        \textbf{[SP\csp]} Students proactively apply for an open internship position.
+
+        \textbf{[SP\csp]} Students track received recommendations about internship offers.
+
+        \textbf{[SP\csp]} Companies track recommendations about potential candidates for their internship offers.
+
+        \textbf{[SP\csp]} Students accept recommendations for internships.
+
+        \textbf{[SP\csp]} Students reject recommendations for internships.
+        
+        \textbf{[SP\csp]} Companies accept recommended candidates for their internships. 
+
+        \textbf{[SP\csp]} Companies reject recommended candidates for their internships. 
+        
+        \textbf{[SP\csp]} Companies contact selected students to set up an interview with them. 
+
+        \textbf{[SP\csp]} Companies submit questions to students. 
+        
+        \textbf{[SP\csp]} Students provide the information required by companies during the interview.
+
+        \textbf{[SP\csp]} Companies finalize the selection process.
+
+        \textbf{[SP\csp]} Students track the outcomes of the interviews they have participated in.
+        
+        \textbf{[SP\csp]} Students and companies report information about an ongoing internship.
+
+        \textbf{[SP\csp]} Students, companies and universities monitor an ongoing internship.
+        
+        \textbf{[SP\csp]} Students and companies report complaints and problems about ongoing internships.
+
+        \textbf{[SP\csp]} Universities report information about the problems they have handled.
+
+        \textbf{[SP\csp]} Students and companies provide feedback and suggestions about internships.
+
+        \textbf{[SP\csp]} Students ask for suggestions about their profiles.
+
+        \textbf{[SP\csp]} Companies ask for suggestions about their internship offers.
+
+\uline{\textbf{Machine Controlled}}
+
+        \textbf{[SP\csp]} The system shows to the students the internship offers which match their selection criteria.
+
+        \textbf{[SP\csp]} The system shows to the companies the list of all the students who have applied for their internship offers.
+
+        \textbf{[SP\csp]} The system shows to students and companies the list of all their received recommendations along with their status.
+
+        \textbf{[SP\csp]} The system forwards communications about the scheduling of interviews from companies to students (and vice-versa).
+        
+        \textbf{[SP\csp]} The system forwards the submitted questions from companies to students.
+        
+        \textbf{[SP\csp]} The system forwards the submitted answers from students to companies, which collect them.
+
+        \textbf{[SP\csp]} The system shows to the candidate students the outcome of their interviews after the conclusion of a selection process.
+
+        \textbf{[SP\csp]} The system forwards information about the ongoing internships to students and companies.
+
+        \textbf{[SP\csp]} The system forwards to universities information about problems in the ongoing internships of their students.
+
+        \textbf{[SP\csp]} The system asks for feedback after the conclusion of an internship to improve its recommendation algorithms.        
+
+        \textbf{[SP\csp]} The system provides suggestions to students about their profiles.
+
+        \textbf{[SP\csp]} The system provides suggestions to companies about the description of their internship offers.
+
+\section{Definitions, Acronyms, Abbreviations}
+\label{sec:definition_acronyms_abbreviations}
+
+\begin{itemize}
+
+\item \textbf{System, Platform}: these terms are used interchangeably when referring to the system-to-be-developed.
+
+\item \textbf{Upload a CV}: refers to completing all required fields in the CV section of the user's profile. This isn't an upload of a file to enforce a standardized format and enable the system to efficiently collect and process the information.
+
+\item \textbf{University, Company}: when the terms are referenced as performing an action, it means that the action is executed by a representative acting on behalf of the respective entity.
+
+\item \textbf{Party}: the term refers to the entities actively involved in the process of apply, participating and managing internships, so both Student and Company; it doesn't include the University.
+
+\item \textbf{Platform Guidelines}: a set of rules and policies ensuring standardized behavior across users and maintaining the platform's integrity and usability.
+
+\item \textbf{In-Platform vs. In-Person Interviews:}
+
+\begin{itemize}
+\item \textbf{In-Platform Interview}: Conducted entirely through the platform tools, such as structured questionnaires.
+\item \textbf{In-Person Interviews}: Requires the candidate and interviewer to meet physically at a designated location.
+\end{itemize}
+
+\item \textbf{Accuracy}: represents the proportion of correct recommendations made by the system, calculated as the ratio of successful matches to the total number of recommendations generated. It provides an overall measure of how well the system performs.
+
+\item \textbf{F1}: a performance metric that combines precision and recall into a single value, balancing the trade-off between the two. Precision measures the proportion of correct recommendations among all generated recommendations, while recall measures the proportion of relevant matches identified out of all possible relevant matches. The F1 score is particularly useful in evaluating the recommendation system when both false positives and false negatives are significant concerns.
+
+\end{itemize}
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{ |l|l| }
+            \hline
+            \textbf{Acronyms} & \textbf{Definition}                              \\
+            \hline
+            RASD             & Requirements Analysis \& Specification Document   \\
+            \hline
+            API             & Application Programming Interface                  \\
+            \hline
+            HTTPS             & HyperText Transfer Protocol over Secure Socket Layer   \\
+            \hline            
+            2FA             &  Two-Factor Authentication \\
+            \hline    
+         \end{tabular}
+        \caption{Acronyms used in the document.}
+        \label{tab:acronyms}%
+    \end{center}
+\end{table}
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{ |l|l| }
+            \hline
+            \textbf{Abbreviations} & \textbf{Definition}
+            \\
+            \hline
+            S\&C               & Student\&Company                     \\
+            \hline
+            G               & Goal                           \\
+            \hline
+            WP             & World Phenomena                          \\
+            \hline
+            SP             & Shared Phenomena                           \\
+            \hline
+            DA             & Domain Assumption                          \\
+            \hline
+            R              & Requirement                           \\
+            \hline
+            UC             & Use Case                           \\
+            \hline
+         \end{tabular}
+        \caption{Abbreviations used in the document.}
+        \label{tab:Abbreviations}%
+    \end{center}
+\end{table}
+
+\section{Revision history}
+\label{sec:revision_history}%
+\label{sec:definition_acronyms_abbreviations}%
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{ |l|l|l|}
+            \hline
+            \textbf{Revised on} & \textbf{Version}   & \textbf{Description}                           \\
+            \hline
+            22/12/2024             & 1.0   &   Initial Release of the document  \\
+            \hline
+            05/01/2025             & 1.1   &   Update of the document according to Design Document decisions  \\
+            \hline
+         \end{tabular}
+         \caption{Revision history}
+        \label{tab:acronyms}%
+    \end{center}
+\end{table}
+
+\paragraph{Integrations in Version 1.1}
+\begin{itemize}
+    \item Removed the misleading use of the concept of notification throughout the document to enhance clarity.
+    \item Minor adjustments to Domain-level Class Diagram.
+    \item Conformed User Interfaces section to UI design provided in Design Document.
+    \item Updated UC1, UC2, UC3 by unifying the sign up process in the initial step of registration.
+    \item Updated UC4 by adding an exception for missing profile information.
+    \item Updated UC6. Publish an Internship Offer, changed the term \textit{Application domain} with \textit{Role}.
+    \item Updated UC17. Handle Problems during an Internship to enhance clarity and better align the process with the interactions available through the university dashboard.
+\end{itemize}
+
+\newcounter{bib}
+\setcounter{bib}{1}
+\newcommand{\cbib} {\thebib\stepcounter{bib}}
+
+\section{Reference Documents}
+\label{sec:reference_documents}
+\begin{itemize}
+    \item{[\cbib]} Di Nitto, Rossi, Camilli, \textit{"A.Y. 2024-2025 Software Engineering 2 Requirement Engineering and Design Project"}, 2024.
+    \item{[\cbib]} ISO/IEC/IEEE 29148:2018, \textit{"Systems and Software Engineering — Life Cycle Processes — Requirements Engineering," International Organization for Standardization, International Electrotechnical Commission, and Institute of Electrical and Electronics Engineers}, 2018.
+\end{itemize}
+
+\section{Document Structure}
+\label{sec:document_structure}%
+This document is composed of six sections:
+\begin{itemize}
+    \item{} \nth{1} Chapter - Introduction
+    \item{} \nth{2} Chapter - Overall Description
+    \item{} \nth{3} Chapter - Specific Requirements
+    \item{} \nth{4} Chapter - Formal Analysis using Alloy
+    \item{} \nth{5} Chapter - Effort Spent
+    \item{} \nth{6} Chapter - References
+\end{itemize}
+
